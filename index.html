@@ -87,9 +87,21 @@
             width: 120px;
             height: 120px;
         }
+
+        #password-prompt {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
+   
 
     <!-- Modal -->
     <div id="modal" class="modal">
@@ -106,7 +118,7 @@
         <h1>CIE Digital</h1>
         <div class="info">
             <span class="label">Estudante</span>
-            <span id="display-name">Mario Augusto Boscheiro Moretto</span>
+            <span id="display-name">GESONEL, o mestre dos disfarces</span>
         </div>
         <div class="info">
             <span class="label">Curso/Campus</span>
@@ -114,7 +126,7 @@
         </div>
         <div class="info">
             <span class="label">CPF</span>
-            <span id="display-cpf">434.336.558-12</span>
+            <span id="display-cpf">0909</span>
         </div>
         <div class="info">
             <span class="label">Tipo de curso</span>
@@ -131,6 +143,7 @@
         <div class="qr-code">
             <img src="/teste2.PNG" alt="QR Code">
         </div>
+        
     </div>
 
     <script>
@@ -139,19 +152,31 @@
             const nameInput = document.getElementById("student-name").value;
             const cpfInput = document.getElementById("student-cpf").value;
 
-            // Check if inputs are filled
+            // Verificar se os campos estão preenchidos
             if (nameInput && cpfInput) {
-                // Update the card with the entered data
+                // Atualizar o cartão com os dados inseridos
                 document.getElementById("display-name").textContent = nameInput;
                 document.getElementById("display-cpf").textContent = cpfInput;
 
-                // Hide modal and show the card
+                // Ocultar o modal e mostrar o cartão
                 document.getElementById("modal").style.display = "none";
                 document.getElementById("card").style.display = "block";
             } else {
                 alert("Por favor, preencha todos os campos!");
             }
         }
+        // Função para solicitar a senha
+        function requestPassword() {
+            const password = prompt("Por favor, insira a senha:");
+            if (password === "96321") {
+                document.getElementById("content").style.display = "block";
+            } else {
+                alert("Senha incorreta. Acesso negado.");
+            }
+        }
+
+        // Solicitar a senha ao carregar a página
+        window.onload = requestPassword;
     </script>
 </body>
 </html>
