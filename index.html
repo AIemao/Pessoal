@@ -10,10 +10,50 @@
             margin: 0;
             background-color: #f0f0f0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
         }
+        /* Modal Style */
+        .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .modal-content button {
+            padding: 10px 20px;
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .modal-content button:hover {
+            background-color: #005a9e;
+        }
+        /* Main Content Style */
         .card {
             background-color: #7dc9f4;
             color: white;
@@ -21,6 +61,7 @@
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none; /* Initially hidden, will be shown after modal */
         }
         .card h1 {
             font-size: 24px;
@@ -49,11 +90,23 @@
     </style>
 </head>
 <body>
-    <div class="card">
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>Digite as informações</h2>
+            <input id="student-name" type="text" placeholder="Digite o nome do estudante">
+            <input id="student-cpf" type="text" placeholder="Digite o CPF">
+            <button onclick="updateCard()">Atualizar Informações</button>
+        </div>
+    </div>
+
+    <!-- Card with Information -->
+    <div id="card" class="card">
         <h1>CIE Digital</h1>
         <div class="info">
             <span class="label">Estudante</span>
-            <span>Mario Augusto Boscheiro Moretto</span>
+            <span id="display-name">Mario Augusto Boscheiro Moretto</span>
         </div>
         <div class="info">
             <span class="label">Curso/Campus</span>
@@ -61,7 +114,7 @@
         </div>
         <div class="info">
             <span class="label">CPF</span>
-            <span>434.336.558-12</span>
+            <span id="display-cpf">434.336.558-12</span>
         </div>
         <div class="info">
             <span class="label">Tipo de curso</span>
@@ -76,8 +129,29 @@
             <span>Sociedade Nacional dos Estudantes</span>
         </div>
         <div class="qr-code">
-            <img src="https://i.imgur.com/TiBR5nY_d.webp?maxwidth=760&fidelity=grand" alt="QR Code">
+            <img src="teste2.png" alt="QR Code">
         </div>
     </div>
+
+    <script>
+        // Function to update card content and show the card
+        function updateCard() {
+            const nameInput = document.getElementById("student-name").value;
+            const cpfInput = document.getElementById("student-cpf").value;
+
+            // Check if inputs are filled
+            if (nameInput && cpfInput) {
+                // Update the card with the entered data
+                document.getElementById("display-name").textContent = nameInput;
+                document.getElementById("display-cpf").textContent = cpfInput;
+
+                // Hide modal and show the card
+                document.getElementById("modal").style.display = "none";
+                document.getElementById("card").style.display = "block";
+            } else {
+                alert("Por favor, preencha todos os campos!");
+            }
+        }
+    </script>
 </body>
 </html>
